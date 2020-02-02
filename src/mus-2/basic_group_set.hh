@@ -391,8 +391,10 @@ public:    // Creation and addition of clauses (note that create_clause is used
     assert(cl->get_grp_id() == gid_Undef);
     assert(!cl->unsorted());
     BasicClause* res = _clreg.lookup_vect(cl->cl_lits());
-    if (res != NULL) // already there
+    if (res != NULL) { // already there
+      destroy_clause(cl);
       return res;
+    }
     // new clause
     _clvec.push_back(cl);
     _size++;

@@ -1,0 +1,5 @@
+c WARNING: MUSer2 did not finish extraction; this is an over-approximation of the result.
+p gcnf 2 3 4
+{1} 1 2 0
+{2} -1 2 0
+{3} -2 0

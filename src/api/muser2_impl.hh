@@ -115,6 +115,10 @@ public:         // Addition of clauses and groups
    */
   gid add_clause(const int* first, const int* last, gid gid);
 
+  /** Remove a group from the group-set.
+   */
+  void remove_group(gid gid);
+
 private:        // Main datastructures ...
 
   ToolConfig config;                    // configuration data

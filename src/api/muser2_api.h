@@ -109,6 +109,10 @@ extern "C" {
    */
   muser2_gid muser2_add_clause(muser2_t h, muser2_lit* first, muser2_lit* last, muser2_gid gid);
 
+  /** Remove a group from the group-set.
+   */
+  void muser2_remove_group(muser2_gid gid);
+
   // Functionality
 
   /** Tests the current group-set for satisfiability.

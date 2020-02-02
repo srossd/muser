@@ -85,6 +85,12 @@ muser2::gid muser2::add_clause(const muser2::lit* first,
   return (muser2::gid)_pimpl->add_clause(first, last, gid);
 }
 
+/** Remove a group from the group-set. Forwards to muser2_impl. */
+void muser2::remove_group(muser2::gid gid)
+{
+  _pimpl->remove_group(gid);
+}
+
 /** Tests the current group-set for satisfiability. */
 int muser2::test_sat(void) { return _pimpl->test_sat(); }
 
@@ -196,6 +202,12 @@ muser2_gid muser2_add_clause(muser2_t h, muser2_lit* first, muser2_lit* last, mu
   } catch (...) {
     return muser2_gid_Undef;
   }
+}
+
+/** Remove a group from the group-set.
+ */
+void muser2_remove_group(muser2_t h, muser2_gid gid) {
+  pm(h)->remove_group(gid);
 }
 
 /** Tests the current group-set for satisfiability. */

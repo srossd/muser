@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define DBG(x) x
+#define DBG(x) 
 
 namespace {     // local declarations ...
 
@@ -56,7 +56,7 @@ void muser2::muser2_impl::reset_all(void)
   vector<BasicClause*>::iterator it_saend = cl_savec.end();
   for ( ; it_sapos != it_saend; ++it_sapos){
     BasicClause* sa_cl = *it_sapos;
-    //cout << "deleting clause: " << sa_cl << endl;
+    // cout << "deleting clause: " << sa_cl << endl;
     _pgset->destroy_clause(sa_cl);
   }
   cl_savec.clear();
@@ -135,23 +135,31 @@ int muser2::muser2_impl::compute_gmus(void)
  */
 muser2::gid muser2::muser2_impl::add_clause(const int* first, const int* last, muser2::gid gid)
 {
+  vector<LINT> lits(first, last);
+  DBG(
   for (const int* f = first; f < last+1; ++f) cout << *f << " ";
   cout << "0" << endl;
-  vector<LINT> lits(first, last + 1);
   for (LINT l : lits) { cout << l << " "; }
-  cout << "0" << endl;
+  cout << "0" << endl;)
   BasicClause* cl = _pgset->create_clause(lits);
   //INIT ALEX
-  cl_savec.push_back(cl);
   //END ALEX
   if (cl->get_grp_id() == gid_Undef) {
+    cl_savec.push_back(cl);
     if (gid == gid_Undef) { gid = _pgset->max_gid() + 1; }
     _pgset->set_cl_grp_id(cl, (GID)gid);     
     DBG(cout << "= muser2::add_clause: new clause ";);
-  } DBG(else { cout << "= muser2::add_clause: existing clause "; });
+  } DBG(else { cout << "= muser2::add_clause: existing clause "; })
   // TODO: if the clause already exists, it needs to be deleted !
   DBG(cout << "{" << cl->get_grp_id() << "} " << *cl << endl;);
   return (muser2::gid)cl->get_grp_id();
+}
+
+/** Remove a group
+ */
+void muser2::muser2_impl::remove_group(muser2::gid gid)
+{
+  _pgset->remove_group(gid);
 }
 
 /*----------------------------------------------------------------------------*/

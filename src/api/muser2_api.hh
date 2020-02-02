@@ -99,6 +99,10 @@ public:         // Addition of clauses and groups
    */
   gid add_clause(const lit* first, const lit* last, gid gid);
 
+  /** Remove a group from the group-set.
+   */
+  void remove_group(gid gid);
+
   // TODO: add "normal" C++ versions of add_clause()
 
 public:         // Functionality
